@@ -381,52 +381,6 @@
       font-size: 0.875rem;
     }
 
-    /* Booking Form Container */
-    .booking-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-    }
-
-    .form-control {
-      width: 100%;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.95rem;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    @media (min-width: 640px) {
-      .form-row { grid-template-columns: 1fr 1fr; }
-    }
-
     /* Map & Contact */
     .contact-grid {
       display: grid;
@@ -493,34 +447,6 @@
       body { padding-bottom: 0; }
     }
 
-    /* Success Toast */
-    .toast {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      left: 1rem;
-      background: var(--success);
-      color: #fff;
-      padding: 1rem;
-      border-radius: 8px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transform: translateY(-150%);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-
-    @media (min-width: 640px) {
-      .toast { left: auto; max-width: 400px; }
-    }
-
-    .toast.show {
-      transform: translateY(0);
-    }
-
     footer {
       border-top: 1px solid var(--border-color);
       padding: 2rem 1rem;
@@ -532,12 +458,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Language Toast Notification -->
-  <div id="toast" class="toast">
-    <i data-lucide="check-circle"></i>
-    <span id="toast-text">Varauspyyntö lähetetty! Otamme yhteyttä pian.</span>
-  </div>
 
   <!-- Header -->
   <header>
@@ -563,16 +483,16 @@
       <div class="location-tag">
         <i data-lucide="map-pin"></i> Mustanportinkatu, 18100 Heinola
       </div>
-      <p data-key="hero-subtitle">Monimerkkikorjaamo palveluksessasi. Määräaikaishuollot, vikadiagnostiikka, jarruhuollot ja katsastuspalvelut laadukkaasti ja luotettavasti.</p>
+      <p data-key="hero-subtitle">Monimerkkikorjaamo palveluksessasi. Määräaikaishuolto, vikadiagnostiikka, jarruhuollot ja katsastuspalvelut laadukkaasti ja luotettavasti.</p>
       
       <div class="hero-buttons">
-        <a href="#booking" class="btn btn-primary">
-          <i data-lucide="calendar"></i>
-          <span data-key="btn-book">Varaa Aika</span>
-        </a>
-        <a href="tel:+35837123456" class="btn btn-secondary">
+        <a href="tel:+35837123456" class="btn btn-primary">
           <i data-lucide="phone"></i>
           <span data-key="btn-call">Soita Korjaamolle</span>
+        </a>
+        <a href="https://maps.google.com/?q=Mustanportinkatu+Heinola+Finland" target="_blank" class="btn btn-secondary">
+          <i data-lucide="navigation"></i>
+          <span data-key="btn-nav">Avaa Navigaattoriin</span>
         </a>
       </div>
     </div>
@@ -622,66 +542,6 @@
     <!-- Services Grid -->
     <div class="services-grid" id="services-container">
       <!-- Generated Dynamically via JavaScript -->
-    </div>
-  </section>
-
-  <!-- Booking Form Section -->
-  <section class="section" id="booking">
-    <div class="booking-section">
-      <h2 class="section-title"><i data-lucide="calendar"></i> <span data-key="booking-title">Varaa Huoltoaika</span></h2>
-      <p class="section-subtitle" data-key="booking-subtitle">Jätä varauspyyntö, niin vahvistamme ajan sinulle mahdollisimman pian.</p>
-
-      <form id="appointment-form" onsubmit="handleBookingSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label data-key="form-name">Nimi *</label>
-            <input type="text" class="form-control" placeholder="Matti Meikäläinen" required>
-          </div>
-          <div class="form-group">
-            <label data-key="form-phone">Puhelinnumero *</label>
-            <input type="tel" class="form-control" placeholder="040 123 4567" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label data-key="form-email">Sähköposti</label>
-            <input type="email" class="form-control" placeholder="matti@esimerkki.fi">
-          </div>
-          <div class="form-group">
-            <label data-key="form-reg">Rekisterinumero *</label>
-            <input type="text" class="form-control" placeholder="ABC-123" required style="text-transform: uppercase;">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label data-key="form-service-select">Valitse pääpalvelu</label>
-            <select class="form-control" id="service-select">
-              <option value="maint" data-key="opt-maint">Määräaikaishuolto</option>
-              <option value="oil" data-key="opt-oil">Öljynvaihto</option>
-              <option value="brakes" data-key="opt-brakes">Jarruhuolto / -korjaus</option>
-              <option value="diag" data-key="opt-diag">Vikakoodien luku / Diagnostiikka</option>
-              <option value="inspection" data-key="opt-inspect">Katsastuspalvelu & Tarkastus</option>
-              <option value="other" data-key="opt-other">Muu korjaustyö</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label data-key="form-date">Toivottu ajankohta</label>
-            <input type="date" class="form-control" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label data-key="form-notes">Lisätiedot / Vian kuvaus</label>
-          <textarea class="form-control" rows="3" placeholder="Kuvaile lyhyesti huoltotarvetta tai havaittua vikaa..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 1rem;">
-          <i data-lucide="send"></i>
-          <span data-key="btn-send-booking">Lähetä Varauspyyntö</span>
-        </button>
-      </form>
     </div>
   </section>
 
@@ -746,11 +606,11 @@
 
   <!-- Mobile Floating Action Bar (FAB) -->
   <div class="mobile-fab">
-    <a href="tel:+35837123456" class="btn btn-secondary" style="flex: 1; margin: 0; padding: 0.75rem;">
-      <i data-lucide="phone"></i> Soita
+    <a href="tel:+35837123456" class="btn btn-primary" style="flex: 1; margin: 0; padding: 0.75rem;">
+      <i data-lucide="phone"></i> <span data-key="btn-call">Soita Korjaamolle</span>
     </a>
-    <a href="#booking" class="btn btn-primary" style="flex: 1.5; margin: 0; padding: 0.75rem;">
-      <i data-lucide="calendar"></i> Varaa Aika
+    <a href="https://maps.google.com/?q=Mustanportinkatu+Heinola+Finland" target="_blank" class="btn btn-secondary" style="flex: 1; margin: 0; padding: 0.75rem;">
+      <i data-lucide="navigation"></i> Navigoi
     </a>
   </div>
 
@@ -769,7 +629,7 @@
         category: 'maintenance',
         title_fi: 'Määräaikaishuolto',
         title_en: 'Scheduled Maintenance',
-        desc_fi: 'Valmistajan huolto-ohjelman mukaiset määräaikaishuollot. Autosi takuu säilyy.',
+        desc_fi: 'Valmistajan huolto-ohjelman mukaiset määräaikaishuolto. Autosi takuu säilyy.',
         desc_en: 'Full scheduled maintenance according to manufacturer specifications. Warranty remains intact.'
       },
       {
@@ -835,8 +695,8 @@
       fi: {
         'hero-title': 'Ammattitaitoinen Autokorjaamo Heinolassa',
         'hero-subtitle': 'Monimerkkikorjaamo palveluksessasi. Määräaikaishuolto, vikadiagnostiikka, jarruhuollot ja katsastuspalvelut laadukkaasti.',
-        'btn-book': 'Varaa Aika',
         'btn-call': 'Soita Korjaamolle',
+        'btn-nav': 'Avaa Navigaattoriin',
         'info-warranty-title': 'Takuu Säilyy',
         'info-warranty-desc': 'Huollamme autosi valmistajan ohjeiden mukaisesti. Uuden auton takuu säilyy.',
         'info-diag-title': 'Nykyaikainen Diagnostiikka',
@@ -850,32 +710,14 @@
         'filter-brakes': 'Jarrut & Alusta',
         'filter-engine': 'Moottori & Diagnostiikka',
         'filter-tires': 'Renkaat',
-        'booking-title': 'Varaa Huoltoaika',
-        'booking-subtitle': 'Jätä varauspyyntö, niin vahvistamme ajan sinulle mahdollisimman pian.',
-        'form-name': 'Nimi *',
-        'form-phone': 'Puhelinnumero *',
-        'form-email': 'Sähköposti',
-        'form-reg': 'Rekisterinumero *',
-        'form-service-select': 'Valitse pääpalvelu',
-        'form-date': 'Toivottu ajankohta',
-        'form-notes': 'Lisätiedot / Vian kuvaus',
-        'btn-send-booking': 'Lähetä Varauspyyntö',
         'contact-title': 'Sijainti & Yhteystiedot',
-        'contact-subtitle': 'Tervetuloa korjaamollemme Heinolan Mustanportinkadulle.',
-        'btn-nav': 'Avaa Navigaattoriin',
-        'opt-maint': 'Määräaikaishuolto',
-        'opt-oil': 'Öljynvaihto',
-        'opt-brakes': 'Jarruhuolto / -korjaus',
-        'opt-diag': 'Vikakoodien luku / Diagnostiikka',
-        'opt-inspect': 'Katsastuspalvelu & Tarkastus',
-        'opt-other': 'Muu korjaustyö',
-        'toast-success': 'Varauspyyntö lähetetty! Otamme yhteyttä pian.'
+        'contact-subtitle': 'Tervetuloa korjaamollemme Heinolan Mustanportinkadulle.'
       },
       en: {
         'hero-title': 'Professional Auto Repair in Heinola',
         'hero-subtitle': 'Full-service auto repair shop. Scheduled maintenance, diagnostics, brake service, and pre-inspection checkups.',
-        'btn-book': 'Book Appointment',
         'btn-call': 'Call Repair Shop',
+        'btn-nav': 'Open Navigation',
         'info-warranty-title': 'Warranty Intact',
         'info-warranty-desc': 'We service your car according to manufacturer guidelines. New car warranty remains valid.',
         'info-diag-title': 'Modern Diagnostics',
@@ -889,26 +731,8 @@
         'filter-brakes': 'Brakes & Chassis',
         'filter-engine': 'Engine & Diag',
         'filter-tires': 'Tires',
-        'booking-title': 'Book Service',
-        'booking-subtitle': 'Submit an appointment request and we will confirm your schedule promptly.',
-        'form-name': 'Full Name *',
-        'form-phone': 'Phone Number *',
-        'form-email': 'Email Address',
-        'form-reg': 'License Plate *',
-        'form-service-select': 'Select Main Service',
-        'form-date': 'Preferred Date',
-        'form-notes': 'Additional Details / Problem Description',
-        'btn-send-booking': 'Submit Booking Request',
         'contact-title': 'Location & Contact',
-        'contact-subtitle': 'Visit our repair shop on Mustanportinkatu, Heinola.',
-        'btn-nav': 'Open Navigation',
-        'opt-maint': 'Scheduled Maintenance',
-        'opt-oil': 'Oil Change',
-        'opt-brakes': 'Brake Service / Repair',
-        'opt-diag': 'Diagnostics & Error Codes',
-        'opt-inspect': 'Pre-Inspection & Check',
-        'opt-other': 'Other Repair Work',
-        'toast-success': 'Booking request sent! We will contact you shortly.'
+        'contact-subtitle': 'Visit our repair shop on Mustanportinkatu, Heinola.'
       }
     };
 
@@ -991,23 +815,6 @@
           ? 'Nyt suljettu (Avoinna ma-pe 08:00 - 17:00)' 
           : 'Currently Closed (Open Mon-Fri 08:00 - 17:00)';
       }
-    }
-
-    // Handle Booking Form Submit
-    function handleBookingSubmit(event) {
-      event.preventDefault();
-      
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      toastText.textContent = translations[currentLang]['toast-success'];
-      
-      toast.classList.add('show');
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-
-      event.target.reset();
     }
 
     // Initialize Page
