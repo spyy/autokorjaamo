@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autokorjaamo Heinola | Mustanportinkatu</title>
+  
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --primary: #f97316;
+      --primary-hover: #ea580c;
+      --accent-blue: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --font-heading: 'Chakra Petch', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 80px; /* Space for Mobile FAB */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: var(--font-heading);
+      letter-spacing: 0.5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo i {
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lang-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 2.5rem 1rem 3rem;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 100%);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .status-badge.open {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .status-badge.closed {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .open .status-dot { background-color: var(--success); }
+    .closed .status-dot { background-color: var(--danger); }
+
+    .hero h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-blue);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero h1 { font-size: 3rem; }
+      .hero-buttons { flex-direction: row; }
+    }
+
+    /* Common Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .btn { width: auto; }
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+    }
+
+    /* Container & Section Styles */
+    .section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title i {
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+    }
+
+    /* Quick Info Cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .info-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .info-icon {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--primary);
+      padding: 0.75rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .info-content h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-content p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Services Grid & Filter */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      scrollbar-width: none;
+    }
+
+    .filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .service-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-icon {
+      color: var(--primary);
+      background: rgba(249, 115, 22, 0.1);
+      padding: 0.6rem;
+      border-radius: 8px;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Booking Form Container */
+    .booking-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Map & Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .map-container {
+      width: 100%;
+      height: 300px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .contact-info-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .contact-item i {
+      color: var(--primary);
+      margin-top: 0.2rem;
+    }
+
+    /* Mobile FAB Navigation */
+    .mobile-fab {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      display: flex;
+      gap: 0.75rem;
+      z-index: 999;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-fab { display: none; }
+      body { padding-bottom: 0; }
+    }
+
+    /* Success Toast */
+    .toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: 1rem;
+      background: var(--success);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transform: translateY(-150%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    @media (min-width: 640px) {
+      .toast { left: auto; max-width: 400px; }
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toast Notification -->
+  <div id="toast" class="toast">
+    <i data-lucide="check-circle"></i>
+    <span id="toast-text">Varauspyyntö lähetetty! Otamme yhteyttä pian.</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <i data-lucide="wrench"></i>
+        <span>HEINOLAN</span> AUTOKORJAAMO
+      </div>
+      <div class="header-actions">
+        <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div id="status-badge" class="status-badge open">
+        <span class="status-dot"></span>
+        <span id="status-text">Avoinna tänään 08:00 - 17:00</span>
+      </div>
+      <h1 data-key="hero-title">Ammattitaitoinen Autokorjaamo Heinolassa</h1>
+      <div class="location-tag">
+        <i data-lucide="map-pin"></i> Mustanportinkatu, 18100 Heinola
+      </div>
+      <p data-key="hero-subtitle">Monimerkkikorjaamo palveluksessasi. Määräaikaishuollot, vikadiagnostiikka, jarruhuollot ja katsastuspalvelut laadukkaasti ja luotettavasti.</p>
+      
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary">
+          <i data-lucide="calendar"></i>
+          <span data-key="btn-book">Varaa Aika</span>
+        </a>
+        <a href="tel:+35837123456" class="btn btn-secondary">
+          <i data-lucide="phone"></i>
+          <span data-key="btn-call">Soita Korjaamolle</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Info Highlights -->
+  <section class="section" style="padding-top: 2rem; padding-bottom: 1rem;">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon"><i data-lucide="shield-check"></i></div>
+        <div class="info-content">
+          <h3 data-key="info-warranty-title">Takuu säilyy</h3>
+          <p data-key="info-warranty-desc">Huollamme autosi valmistajan ohjeiden mukaisesti. Uuden auton takuu säilyy.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i data-lucide="cpu"></i></div>
+        <div class="info-content">
+          <h3 data-key="info-diag-title">Nykyaikainen diagnostiikka</h3>
+          <p data-key="info-diag-desc">Käytössämme on uusin vikakoodien lukulaitteisto kaikille automerkeille.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i data-lucide="clock"></i></div>
+        <div class="info-content">
+          <h3 data-key="info-fast-title">Nopea palvelu</h3>
+          <p data-key="info-fast-desc">Joustavat ajat ja laadukas työnjälki ilman pitkiä odotusaikoja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section" id="services">
+    <h2 class="section-title"><i data-lucide="settings"></i> <span data-key="services-title">Palvelumme</span></h2>
+    <p class="section-subtitle" data-key="services-subtitle">Kattavat huolto- ja korjauspalvelut kaikille henkilö- ja pakettiautoille.</p>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="tab-btn active" onclick="filterServices('all', this)" data-key="filter-all">Kaikki</button>
+      <button class="tab-btn" onclick="filterServices('maintenance', this)" data-key="filter-maint">Huollot</button>
+      <button class="tab-btn" onclick="filterServices('brakes', this)" data-key="filter-brakes">Jarrut & Alusta</button>
+      <button class="tab-btn" onclick="filterServices('engine', this)" data-key="filter-engine">Moottori & Diagnostiikka</button>
+      <button class="tab-btn" onclick="filterServices('tires', this)" data-key="filter-tires">Renkaat</button>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="services-grid" id="services-container">
+      <!-- Generated Dynamically via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Booking Form Section -->
+  <section class="section" id="booking">
+    <div class="booking-section">
+      <h2 class="section-title"><i data-lucide="calendar"></i> <span data-key="booking-title">Varaa Huoltoaika</span></h2>
+      <p class="section-subtitle" data-key="booking-subtitle">Jätä varauspyyntö, niin vahvistamme ajan sinulle mahdollisimman pian.</p>
+
+      <form id="appointment-form" onsubmit="handleBookingSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-key="form-name">Nimi *</label>
+            <input type="text" class="form-control" placeholder="Matti Meikäläinen" required>
+          </div>
+          <div class="form-group">
+            <label data-key="form-phone">Puhelinnumero *</label>
+            <input type="tel" class="form-control" placeholder="040 123 4567" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-key="form-email">Sähköposti</label>
+            <input type="email" class="form-control" placeholder="matti@esimerkki.fi">
+          </div>
+          <div class="form-group">
+            <label data-key="form-reg">Rekisterinumero *</label>
+            <input type="text" class="form-control" placeholder="ABC-123" required style="text-transform: uppercase;">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-key="form-service-select">Valitse pääpalvelu</label>
+            <select class="form-control" id="service-select">
+              <option value="maint" data-key="opt-maint">Määräaikaishuolto</option>
+              <option value="oil" data-key="opt-oil">Öljynvaihto</option>
+              <option value="brakes" data-key="opt-brakes">Jarruhuolto / -korjaus</option>
+              <option value="diag" data-key="opt-diag">Vikakoodien luku / Diagnostiikka</option>
+              <option value="inspection" data-key="opt-inspect">Katsastuspalvelu & Tarkastus</option>
+              <option value="other" data-key="opt-other">Muu korjaustyö</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-key="form-date">Toivottu ajankohta</label>
+            <input type="date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-key="form-notes">Lisätiedot / Vian kuvaus</label>
+          <textarea class="form-control" rows="3" placeholder="Kuvaile lyhyesti huoltotarvetta tai havaittua vikaa..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 1rem;">
+          <i data-lucide="send"></i>
+          <span data-key="btn-send-booking">Lähetä Varauspyyntö</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Map & Contact Details -->
+  <section class="section" id="contact">
+    <h2 class="section-title"><i data-lucide="map-pin"></i> <span data-key="contact-title">Sijainti & Yhteystiedot</span></h2>
+    <p class="section-subtitle" data-key="contact-subtitle">Tervetuloa korjaamollemme Heinolan Mustanportinkadulle.</p>
+
+    <div class="contact-grid">
+      <!-- Google Map iframe -->
+      <div class="map-container">
+        <iframe 
+          title="Heinola Mustanportinkatu Map"
+          src="https://maps.google.com/maps?q=Mustanportinkatu%20Heinola%20Finland&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info-box">
+        <div class="contact-item">
+          <i data-lucide="map-pin"></i>
+          <div>
+            <strong>Osoite:</strong><br>
+            Mustanportinkatu<br>
+            18100 Heinola, Suomi
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <i data-lucide="phone"></i>
+          <div>
+            <strong>Puhelin:</strong><br>
+            <a href="tel:+35837123456" style="color: var(--primary); font-weight: 600;">03 712 3456</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <i data-lucide="mail"></i>
+          <div>
+            <strong>Sähköposti:</strong><br>
+            <a href="mailto:huolto@heinolanautokorjaamo.fi">huolto@heinolanautokorjaamo.fi</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <i data-lucide="clock"></i>
+          <div>
+            <strong>Aukioloajat:</strong><br>
+            Ma - Pe: 08:00 - 17:00<br>
+            La - Su: Suljettu
+          </div>
+        </div>
+
+        <a href="https://maps.google.com/?q=Mustanportinkatu+Heinola+Finland" target="_blank" class="btn btn-secondary" style="margin-top: 0.5rem;">
+          <i data-lucide="navigation"></i>
+          <span data-key="btn-nav">Avaa Navigaattoriin</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Floating Action Bar (FAB) -->
+  <div class="mobile-fab">
+    <a href="tel:+35837123456" class="btn btn-secondary" style="flex: 1; margin: 0; padding: 0.75rem;">
+      <i data-lucide="phone"></i> Soita
+    </a>
+    <a href="#booking" class="btn btn-primary" style="flex: 1.5; margin: 0; padding: 0.75rem;">
+      <i data-lucide="calendar"></i> Varaa Aika
+    </a>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Heinolan Autokorjaamo. Mustanportinkatu, Heinola.</p>
+  </footer>
+
+  <script>
+    // Initialize Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Data Structure for Services
+    const services = [
+      {
+        id: 1,
+        category: 'maintenance',
+        title_fi: 'Määräaikaishuolto',
+        title_en: 'Scheduled Maintenance',
+        desc_fi: 'Valmistajan huolto-ohjelman mukaiset määräaikaishuollot. Autosi takuu säilyy.',
+        desc_en: 'Full scheduled maintenance according to manufacturer specifications. Warranty remains intact.'
+      },
+      {
+        id: 2,
+        category: 'maintenance',
+        title_fi: 'Öljynvaihto & Suodattimet',
+        title_en: 'Oil Change & Filters',
+        desc_fi: 'Laadukkaat moottoriöljyt ja alkuperäislaatuiset suodattimet moottorin optimaaliseen toimintaan.',
+        desc_en: 'High-grade engine oil and OEM quality filters for smooth engine operations.'
+      },
+      {
+        id: 3,
+        category: 'brakes',
+        title_fi: 'Jarruhuolto & Korjaus',
+        title_en: 'Brake Repair & Service',
+        desc_fi: 'Jarrupalojen, -levyjen ja -nesteiden tarkastus sekä vaihtotyöt turvallisuutesi takeeksi.',
+        desc_en: 'Inspection and replacement of brake pads, discs, and fluids for maximum safety.'
+      },
+      {
+        id: 4,
+        category: 'engine',
+        title_fi: 'Tietokonediagnostiikka',
+        title_en: 'Computer Diagnostics',
+        desc_fi: 'Moniapu-vikakoodien luku ja nollaus sekä syvällisempi vianjäljitys nykyaikaisilla laitteilla.',
+        desc_en: 'Fault code reading, resetting, and modern diagnostic troubleshooting.'
+      },
+      {
+        id: 5,
+        category: 'brakes',
+        title_fi: 'Alustan & Jousituksen Korjaukset',
+        title_en: 'Suspension & Chassis Repairs',
+        desc_fi: 'Iskunvaimentimien, jousien, tukivarsien ja pallonivelten vaihdot ja korjaukset.',
+        desc_en: 'Replacement of shock absorbers, springs, control arms, and ball joints.'
+      },
+      {
+        id: 6,
+        category: 'tires',
+        title_fi: 'Rengaspalvelut',
+        title_en: 'Tire Services',
+        desc_fi: 'Renkaiden vaihdot, tasapainotukset ja kausisäilytys puhtaassa tilassa.',
+        desc_en: 'Tire changes, wheel balancing, and seasonal tire storage services.'
+      },
+      {
+        id: 7,
+        category: 'engine',
+        title_fi: 'Katsastuspalvelu',
+        title_en: 'Inspection Service',
+        desc_fi: 'Katsastustarkastus, päästömittaukset (bensiini/diesel) ja katsastuksessa käyttö puolestasi.',
+        desc_en: 'Pre-inspection check, emissions testing, and taking the car to inspection for you.'
+      },
+      {
+        id: 8,
+        category: 'engine',
+        title_fi: 'Ilmastointihuolto',
+        title_en: 'AC Service & Recharge',
+        desc_fi: 'Auton ilmastointijärjestelmän täyttöhuolto, kylmäaineet ja vuototestaus.',
+        desc_en: 'Air conditioning refrigerant refill, system checks, and leak testing.'
+      }
+    ];
+
+    // Language Dictionary
+    const translations = {
+      fi: {
+        'hero-title': 'Ammattitaitoinen Autokorjaamo Heinolassa',
+        'hero-subtitle': 'Monimerkkikorjaamo palveluksessasi. Määräaikaishuolto, vikadiagnostiikka, jarruhuollot ja katsastuspalvelut laadukkaasti.',
+        'btn-book': 'Varaa Aika',
+        'btn-call': 'Soita Korjaamolle',
+        'info-warranty-title': 'Takuu Säilyy',
+        'info-warranty-desc': 'Huollamme autosi valmistajan ohjeiden mukaisesti. Uuden auton takuu säilyy.',
+        'info-diag-title': 'Nykyaikainen Diagnostiikka',
+        'info-diag-desc': 'Käytössämme on uusin vikakoodien lukulaitteisto kaikille automerkeille.',
+        'info-fast-title': 'Nopea Palvelu',
+        'info-fast-desc': 'Joustavat ajat ja laadukas työnjälki ilman pitkiä odotusaikoja.',
+        'services-title': 'Palvelumme',
+        'services-subtitle': 'Kattavat huolto- ja korjauspalvelut kaikille henkilö- ja pakettiautoille.',
+        'filter-all': 'Kaikki',
+        'filter-maint': 'Huollot',
+        'filter-brakes': 'Jarrut & Alusta',
+        'filter-engine': 'Moottori & Diagnostiikka',
+        'filter-tires': 'Renkaat',
+        'booking-title': 'Varaa Huoltoaika',
+        'booking-subtitle': 'Jätä varauspyyntö, niin vahvistamme ajan sinulle mahdollisimman pian.',
+        'form-name': 'Nimi *',
+        'form-phone': 'Puhelinnumero *',
+        'form-email': 'Sähköposti',
+        'form-reg': 'Rekisterinumero *',
+        'form-service-select': 'Valitse pääpalvelu',
+        'form-date': 'Toivottu ajankohta',
+        'form-notes': 'Lisätiedot / Vian kuvaus',
+        'btn-send-booking': 'Lähetä Varauspyyntö',
+        'contact-title': 'Sijainti & Yhteystiedot',
+        'contact-subtitle': 'Tervetuloa korjaamollemme Heinolan Mustanportinkadulle.',
+        'btn-nav': 'Avaa Navigaattoriin',
+        'opt-maint': 'Määräaikaishuolto',
+        'opt-oil': 'Öljynvaihto',
+        'opt-brakes': 'Jarruhuolto / -korjaus',
+        'opt-diag': 'Vikakoodien luku / Diagnostiikka',
+        'opt-inspect': 'Katsastuspalvelu & Tarkastus',
+        'opt-other': 'Muu korjaustyö',
+        'toast-success': 'Varauspyyntö lähetetty! Otamme yhteyttä pian.'
+      },
+      en: {
+        'hero-title': 'Professional Auto Repair in Heinola',
+        'hero-subtitle': 'Full-service auto repair shop. Scheduled maintenance, diagnostics, brake service, and pre-inspection checkups.',
+        'btn-book': 'Book Appointment',
+        'btn-call': 'Call Repair Shop',
+        'info-warranty-title': 'Warranty Intact',
+        'info-warranty-desc': 'We service your car according to manufacturer guidelines. New car warranty remains valid.',
+        'info-diag-title': 'Modern Diagnostics',
+        'info-diag-desc': 'Equipped with state-of-the-art diagnostic gear for all car makes and models.',
+        'info-fast-title': 'Fast & Reliable',
+        'info-fast-desc': 'Flexible scheduling and top-quality workmanship with short turnarounds.',
+        'services-title': 'Our Services',
+        'services-subtitle': 'Comprehensive auto repair and maintenance services for cars and vans.',
+        'filter-all': 'All Services',
+        'filter-maint': 'Maintenance',
+        'filter-brakes': 'Brakes & Chassis',
+        'filter-engine': 'Engine & Diag',
+        'filter-tires': 'Tires',
+        'booking-title': 'Book Service',
+        'booking-subtitle': 'Submit an appointment request and we will confirm your schedule promptly.',
+        'form-name': 'Full Name *',
+        'form-phone': 'Phone Number *',
+        'form-email': 'Email Address',
+        'form-reg': 'License Plate *',
+        'form-service-select': 'Select Main Service',
+        'form-date': 'Preferred Date',
+        'form-notes': 'Additional Details / Problem Description',
+        'btn-send-booking': 'Submit Booking Request',
+        'contact-title': 'Location & Contact',
+        'contact-subtitle': 'Visit our repair shop on Mustanportinkatu, Heinola.',
+        'btn-nav': 'Open Navigation',
+        'opt-maint': 'Scheduled Maintenance',
+        'opt-oil': 'Oil Change',
+        'opt-brakes': 'Brake Service / Repair',
+        'opt-diag': 'Diagnostics & Error Codes',
+        'opt-inspect': 'Pre-Inspection & Check',
+        'opt-other': 'Other Repair Work',
+        'toast-success': 'Booking request sent! We will contact you shortly.'
+      }
+    };
+
+    let currentLang = 'fi';
+
+    // Render Services Grid
+    function renderServices(filter = 'all') {
+      const container = document.getElementById('services-container');
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? services 
+        : services.filter(s => s.category === filter);
+
+      filtered.forEach(service => {
+        const title = currentLang === 'fi' ? service.title_fi : service.title_en;
+        const desc = currentLang === 'fi' ? service.desc_fi : service.desc_en;
+
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.innerHTML = `
+          <div class="service-header">
+            <div class="service-icon"><i data-lucide="wrench"></i></div>
+            <h3>${title}</h3>
+          </div>
+          <p>${desc}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Filter Service Category
+    function filterServices(category, btnElement) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderServices(category);
+    }
+
+    // Toggle Language
+    function toggleLanguage() {
+      currentLang = currentLang === 'fi' ? 'en' : 'fi';
+      document.getElementById('lang-toggle-btn').textContent = currentLang === 'fi' ? 'EN' : 'FI';
+
+      // Update text contents
+      document.querySelectorAll('[data-key]').forEach(elem => {
+        const key = elem.getAttribute('data-key');
+        if (translations[currentLang][key]) {
+          elem.textContent = translations[currentLang][key];
+        }
+      });
+
+      // Update open status badge text format
+      checkOpeningStatus();
+
+      // Re-render Services
+      renderServices();
+    }
+
+    // Check Business Opening Hours (Mon-Fri 08:00 - 17:00)
+    function checkOpeningStatus() {
+      const now = new Date();
+      const day = now.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+      const hour = now.getHours();
+
+      const badge = document.getElementById('status-badge');
+      const text = document.getElementById('status-text');
+
+      const isOpen = (day >= 1 && day <= 5) && (hour >= 8 && hour < 17);
+
+      if (isOpen) {
+        badge.className = 'status-badge open';
+        text.textContent = currentLang === 'fi' 
+          ? 'Avoinna tänään 08:00 - 17:00' 
+          : 'Open today 08:00 - 17:00';
+      } else {
+        badge.className = 'status-badge closed';
+        text.textContent = currentLang === 'fi' 
+          ? 'Nyt suljettu (Avoinna ma-pe 08:00 - 17:00)' 
+          : 'Currently Closed (Open Mon-Fri 08:00 - 17:00)';
+      }
+    }
+
+    // Handle Booking Form Submit
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+      
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = translations[currentLang]['toast-success'];
+      
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+
+      event.target.reset();
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderServices();
+      checkOpeningStatus();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
